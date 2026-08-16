@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 
 export type ResolvedAppearance = 'light' | 'dark';
 export type Appearance = ResolvedAppearance | 'system';
@@ -84,6 +84,7 @@ export function initializeTheme(): void {
     applyTheme(currentAppearance);
 
     // Set up system theme change listener
+    mediaQuery()?.removeEventListener('change', handleSystemThemeChange);
     mediaQuery()?.addEventListener('change', handleSystemThemeChange);
 }
 
@@ -93,6 +94,10 @@ export function useAppearance(): UseAppearanceReturn {
         () => currentAppearance,
         () => 'system',
     );
+
+    useEffect(() => {
+        initializeTheme();
+    }, []);
 
     const resolvedAppearance: ResolvedAppearance = isDarkMode(appearance)
         ? 'dark'
@@ -113,3 +118,4 @@ export function useAppearance(): UseAppearanceReturn {
 
     return { appearance, resolvedAppearance, updateAppearance } as const;
 }
+

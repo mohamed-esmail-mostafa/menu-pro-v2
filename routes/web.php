@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/', 'welcome')->name('home');
+use App\Http\Controllers\PublicController;
+
+Route::get('/', [PublicController::class, 'home_page'])->name('home');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
