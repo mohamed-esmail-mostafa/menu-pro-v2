@@ -39,4 +39,16 @@ class Store extends Model
      public function user(){
         return $this->belongsTo(User::class);
     }
+
+     public function categories()
+    {
+        
+       return $this->belongsToMany(Category::class,'store_categories','store_id','category_id')->withPivot([
+            'name',
+            'image',
+            'slug',
+            'description',
+            'position'
+        ])->withTimestamps();
+    }
 }

@@ -6,6 +6,7 @@ import AppLayout from '@/layouts/app-layout';
 import AuthLayout from '@/layouts/auth-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 import '@/i18n/index'
+import StoreProvider from './context/store-provider';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -27,8 +28,10 @@ createInertiaApp({
     withApp(app) {
         return (
             <TooltipProvider delayDuration={0}>
-                {app}
-                <Toaster />
+                <StoreProvider>
+                    {app}
+                    <Toaster />
+                </StoreProvider>
             </TooltipProvider>
         );
     },

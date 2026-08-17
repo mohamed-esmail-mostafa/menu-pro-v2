@@ -1,3 +1,5 @@
+import { Category } from "./category";
+
 export interface Store {
     id: number;
     name: string;
@@ -8,4 +10,5 @@ export interface Store {
     address: string | null;
     phone: string | null;
     is_verified: number;
+    categories:Category[]
 }

@@ -13,6 +13,7 @@ import {
   SheetTrigger,
   SheetClose,
 } from '@/components/ui/sheet'
+import AuthMenu from './auth-menu'
 
 export default function Navbar() {
   const { t, i18n } = useTranslation()
@@ -79,31 +80,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-2 lg:gap-3">
           <LangToggle />
           <ThemeToggle />
-
-          {auth?.user ? (
-            <Button asChild size="sm" className="rounded-full font-semibold px-4 gap-1.5">
-              <Link href="/dashboard">
-                <Sparkles className="size-3.5" />
-                {t('nav.dashboard')}
-              </Link>
-            </Button>
-          ) : (
-            <>
-              <Button asChild variant="ghost" size="sm" className="rounded-full font-medium px-3.5">
-                <Link href="/login">{t('nav.login')}</Link>
-              </Button>
-              <Button
-                asChild
-                size="sm"
-                className="rounded-full font-semibold px-4 shadow-sm hover:shadow-md transition-all gap-1 bg-primary text-primary-foreground"
-              >
-                <Link href="/register">
-                  {t('nav.register')}
-                  <ArrowRight className="size-3.5 rtl:rotate-180" />
-                </Link>
-              </Button>
-            </>
-          )}
+          <AuthMenu />
         </div>
 
         {/* Mobile Header Controls & Sheet Trigger */}

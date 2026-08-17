@@ -12,7 +12,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 require __DIR__.'/public.php';
+require __DIR__.'/redirect.php';
 require __DIR__.'/settings.php';
 // require __DIR__.'/roles.php';
 require __DIR__.'/countries.php';
 require __DIR__.'/stores.php';
+require __DIR__.'/categories.php';

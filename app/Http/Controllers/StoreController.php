@@ -31,7 +31,7 @@ class StoreController extends Controller
     public function create_store(StoreStoreRequest $request)
     {
         $this->storeService->createStore($request);
-        return redirect()->route('stores.vendor.stores');
+        return redirect()->route('stores.vendor.page');
     }
 
 
@@ -61,4 +61,19 @@ class StoreController extends Controller
         ]);
     }
 
+    public function store_dashboard($storeId = null)
+    {
+        $stores = $this->storeService->getAuthStores();
+        $store = null;
+        if ($storeId) {
+            $store = Store::find($storeId);
+        } else if (count($stores) > 0) {
+            $store = $stores[0];
+        }
+
+        return Inertia::render('store-dashboard/index', [
+            'store'  => $store,
+            'stores' => $stores,
+        ]);
+    }
 }
