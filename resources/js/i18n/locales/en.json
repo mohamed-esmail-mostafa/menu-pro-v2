@@ -138,7 +138,9 @@
         "is_required":"Required",
         "is_default":"Default",
         "page-error":"There Error Happended , Please Try Again",
-        "go-back":"Go Back"
+        "go-back":"Go Back",
+        "create-success":"Created Successfully",
+        "create-failed":"Created Failed"
     },
     "nav": {
         "home": "Home",
@@ -335,25 +337,27 @@
             "item-count": "Items",
             "no-categories": "No categories added yet."
         },
-        "meals": {
-            "add-new": "Add New Meal",
-            "edit": "Edit Meal",
-            "delete": "Delete Meal",
-            "title-en": "Meal Name (EN)",
-            "title-ar": "Meal Name (AR)",
-            "desc-en": "Description (EN)",
-            "desc-ar": "Description (AR)",
+        "products": {
+            
+            "title": "Products & Meals",
+            "subtitle": "Add and manage products and set their prices",
+            "add-new": "Add New Product",
+            "edit": "Edit Product",
+            "delete": "Delete Product",
+            "select-category": "Select Category",
+            "product-title": "Product Title",
+            "description": "Product Description",
             "price": "Price",
-            "category": "Category",
-            "status": "Availability Status",
-            "available": "Available",
-            "out-of-stock": "Out of Stock",
-            "prep-time": "Prep Time (mins)",
-            "tags": "Dietary Tags",
-            "spicy": "Spicy 🔥",
-            "vegetarian": "Vegetarian 🌱",
-            "popular": "Popular ⭐",
-            "no-meals": "No meals found."
+            "sale-price": "Sale Price (Optional)",
+            "is_simple": "Simple Product",
+            "is_featured": "Featured Product",
+            "product-image": "Product Image",
+            "no-products": "No products added yet",
+            "no-products-desc": "Add your store's first product or meal now",
+            "confirm-delete": "Are you sure you want to delete this product?",
+            "created-success": "Product created successfully",
+            "updated-success": "Product updated successfully",
+            "deleted-success": "Product deleted successfully"
         },
         "qr": {
             "main-qr": "Main Store Menu QR",
@@ -363,5 +367,12 @@
             "add-table": "Add Table",
             "table-number": "Table Number"
         }
+    },
+    "tables":{
+        "table-name":"Table Name",
+        "capacity":"Capacity"
+    },
+    "validations":{
+        "required":"This Required"
     }
 }

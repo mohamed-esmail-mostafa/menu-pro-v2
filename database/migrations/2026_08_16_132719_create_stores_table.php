@@ -28,6 +28,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(false);
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_verified')->default(false);
+            $table->enum('store_status',["open" , "closed" ,"crowded" , "empty" , "little_crowed"])->default("open");
             $table->timestamps();
         });
     }

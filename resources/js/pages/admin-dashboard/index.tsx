@@ -1,7 +1,15 @@
-import React from 'react'
 
-export default function index() {
+import useImport from '@/hooks/use-import'
+import AdminLayout from '@/layouts/admin-layout'
+
+export default function AdminDashboard() {
+
+  const { t } = useImport()
+
+
   return (
-    <div>index</div>
+    <AdminLayout>
+      sdfsdf
+    </AdminLayout>
   )
 }

@@ -13,9 +13,9 @@ export default function StoreDashboardLayout({ children }: { children: React.Rea
     const tabs = [
         { id: 'overview', label: t('store_dashboard.tab-overview'), icon: LayoutDashboard },
         { id: 'categories', label: t('store_dashboard.tab-categories'), icon: Layers, href: `/categories/page/${store?.slug}` },
-        { id: 'meals', label: t('store_dashboard.tab-meals'), icon: Utensils, href: `/store/categories/${store?.id}` },
+        { id: 'meals', label: t('store_dashboard.tab-meals'), icon: Utensils, href: `/store/products/page/${store?.slug}` },
         { id: 'orders', label: t('store_dashboard.tab-orders'), icon: ShoppingBag, href: "/store/categories/{storeId?}" },
-        { id: 'qr', label: t('store_dashboard.tab-qr'), icon: QrCode, href: "/store/categories/{storeId?}" },
+        { id: 'qr', label: t('store_dashboard.tab-qr'), icon: QrCode, href: `/store/tables/page/${store?.slug}` },
         { id: 'settings', label: t('store_dashboard.tab-settings'), icon: Settings, href: "/store/categories/{storeId?}" },
     ]
     return (

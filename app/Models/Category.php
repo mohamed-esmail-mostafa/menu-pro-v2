@@ -20,10 +20,7 @@ class Category extends Model
     ];
 
    
-    // public function products()
-    // {
-    //     return $this->hasMany(Product::class);
-    // }
+   
 
     public function stores()
     {
@@ -35,6 +32,10 @@ class Category extends Model
             'description',
             'position'
         ])->withTimestamps();
+    }
+
+    public function store_categories(){
+        return $this->hasMany(StoreCategory::class);
     }
 
 }

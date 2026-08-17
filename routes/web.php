@@ -18,3 +18,6 @@ require __DIR__.'/settings.php';
 require __DIR__.'/countries.php';
 require __DIR__.'/stores.php';
 require __DIR__.'/categories.php';
+require __DIR__.'/products.php';
+require __DIR__.'/tables.php';
+require __DIR__.'/website-settings.php';

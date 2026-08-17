@@ -1,4 +1,7 @@
 import { Category } from "./category";
+import { Country } from "./country";
+import { Product } from "./product";
+import { Table } from "./table";
 
 export interface Store {
     id: number;
@@ -10,5 +13,8 @@ export interface Store {
     address: string | null;
     phone: string | null;
     is_verified: number;
-    categories:Category[]
+    categories: Category[];
+    products?: Product[];
+    country?:Country;
+    tables?:Table[]
 }

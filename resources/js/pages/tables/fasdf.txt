@@ -1,0 +1,20 @@
+ // if (isEdit) {
+            //     router.put(route('store.table.update', table.id), values, {
+            //         onSuccess: () => {
+            //             onClose()
+            //             formik.resetForm()
+            //         },
+            //         onError: (errors) => {
+            //             console.error('Update failed:', errors)
+            //         }
+            //     })
+            // } else {
+            //     router.post(route('store.table.store',currentStore.id), values, {
+            //         onSuccess: () => {
+            //             formik.resetForm()
+            //         },
+            //         onError: (errors) => {
+            //             console.error('Creation failed:', errors)
+            //         }
+            //     })
+            // }
