@@ -1,5 +1,5 @@
 {
-   "auth": {
+    "auth": {
         "register-store": "Register Your Restaurant",
         "store-registration": "Easily register your restaurant and start using our digital menu platform today.",
         "account-info": "Account Information",
@@ -88,9 +88,9 @@
         "confirm-password-required": "Confirm password is required",
         "store-name-required": "Store name is required",
         "country-required": "Country is required",
-        "google-login":"Login With Google"
+        "google-login": "Login With Google"
     },
-      "common": {
+    "common": {
         "change": "Change",
         "remove": "Remove",
         "upload-image": "Click to upload or drag and drop",
@@ -130,17 +130,19 @@
         "unverify": "Unverify",
         "add_to_order": "Add to Order",
         "address": "Address",
-        "browse-categories":"Browse Our Categories",
-        "browse-meals":"Browse Our Meals",
-        "success":"Done Successfully",
-        "error_happened":"Error Happened , Try Again",
-        "invalid-email":"Invalid email address",
-        "is_required":"Required",
-        "is_default":"Default",
-        "page-error":"There Error Happended , Please Try Again",
-        "go-back":"Go Back",
-        "create-success":"Created Successfully",
-        "create-failed":"Created Failed"
+        "browse-categories": "Browse Our Categories",
+        "browse-meals": "Browse Our Meals",
+        "success": "Done Successfully",
+        "error_happened": "Error Happened , Try Again",
+        "invalid-email": "Invalid email address",
+        "is_required": "Required",
+        "is_default": "Default",
+        "page-error": "There Error Happended , Please Try Again",
+        "go-back": "Go Back",
+        "create-success": "Created Successfully",
+        "create-failed": "Created Failed",
+        "logo-slogn": "QR Digital Menu",
+        "settings":"Setting"
     },
     "nav": {
         "home": "Home",
@@ -322,7 +324,7 @@
             "no-orders": "No orders found in this status."
         },
         "categories": {
-            "title":"Categories",
+            "title": "Categories",
             "choose-category": "Choose Available Categories",
             "add-category": "Add Category to Store",
             "search-categories": "Search categories...",
@@ -338,7 +340,6 @@
             "no-categories": "No categories added yet."
         },
         "products": {
-            
             "title": "Products & Meals",
             "subtitle": "Add and manage products and set their prices",
             "add-new": "Add New Product",
@@ -368,12 +369,12 @@
             "table-number": "Table Number"
         }
     },
-    "tables":{
-        "table-name":"Table Name",
-        "capacity":"Capacity"
+    "tables": {
+        "table-name": "Table Name",
+        "capacity": "Capacity"
     },
-    "validations":{
-        "required":"This Required"
+    "validations": {
+        "required": "This Required"
     },
     "website_setting": {
         "title": "Website Settings",

@@ -21,7 +21,7 @@ class RedirectController extends Controller
                 break;
 
             case "admin": 
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('website-setting.index');
                 break;
 
             default:

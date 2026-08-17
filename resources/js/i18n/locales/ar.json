@@ -1,5 +1,5 @@
 {
-   "auth": {
+    "auth": {
         "register-store": " تسجيل المطعم ",
         "store-registration": "  سجّل مطعمك بسهولة وابدأ باستخدام منصة القوائم الرقمية الخاصة بنا اليوم لمطعمك ",
         "account-info": "معلومات الحساب",
@@ -88,9 +88,9 @@
         "confirm-password-required": "تأكيد كلمة المرور مطلوب",
         "store-name-required": "اسم المتجر مطلوب",
         "country-required": "الدولة مطلوبة",
-         "google-login":" الدخول باستخدام جوجل "
+        "google-login": " الدخول باستخدام جوجل "
     },
-       "common": {
+    "common": {
         "change": "تغيير",
         "remove": "إزالة",
         "upload-image": "انقر للرفع أو اسحب وأفلت",
@@ -135,12 +135,14 @@
         "success": " تم بنجاح ",
         "error_happened": " حدث خطا حاول مرة اخري ",
         "invalid-email": "البريد الإلكتروني غير صحيح",
-        "is_required":"مطلوب",
-        "is_default":"افتراضي",
-        "page-error":" حدث خطا من فضلك حاول مرة اخري ",
-        "go-back":"العودة للخلف",
-         "create-success":" تم الانشاء بنجاح ",
-        "create-failed":" فشل الانشاء "
+        "is_required": "مطلوب",
+        "is_default": "افتراضي",
+        "page-error": " حدث خطا من فضلك حاول مرة اخري ",
+        "go-back": "العودة للخلف",
+        "create-success": " تم الانشاء بنجاح ",
+        "create-failed": " فشل الانشاء ",
+        "logo-slogn": " منصة المنيو الرقمية ",
+         "settings":" الإعدادات "
     },
     "nav": {
         "home": "الرئيسية",
@@ -322,7 +324,7 @@
             "no-orders": "لا توجد طلبات في هذه الحالة."
         },
         "categories": {
-            "title":" الاقسام ",
+            "title": " الاقسام ",
             "choose-category": "اختر من الأقسام المتاحة",
             "add-category": "إضافة القسم للمتجر",
             "search-categories": "ابحث عن قسم...",
@@ -387,12 +389,12 @@
             "table-number": "رقم الطاولة"
         }
     },
-     "tables":{
-        "table-name":" اسم الطاولة ",
-        "capacity":" السعة "
+    "tables": {
+        "table-name": " اسم الطاولة ",
+        "capacity": " السعة "
     },
-    "validations":{
-        "required":" مطلوب "
+    "validations": {
+        "required": " مطلوب "
     },
     "website_setting": {
         "title": "إعدادات الموقع الإلكتروني",

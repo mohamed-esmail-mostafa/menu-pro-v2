@@ -14,6 +14,7 @@ import {
   SheetClose,
 } from '@/components/ui/sheet'
 import AuthMenu from './auth-menu'
+import Logo from './logo'
 
 export default function Navbar() {
   const { t, i18n } = useTranslation()
@@ -47,22 +48,7 @@ export default function Navbar() {
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="size-10 rounded-xl bg-gradient-to-tr from-primary to-emerald-500 p-0.5 shadow-md group-hover:scale-105 transition-transform">
-            <div className="size-full bg-background rounded-[10px] flex items-center justify-center">
-              <QrCode className="size-5 text-primary" />
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <span className="font-extrabold text-lg sm:text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground/90 to-primary">
-              Menu<span className="text-primary">Pro</span>
-            </span>
-            <span className="text-[10px] leading-3 font-medium text-muted-foreground hidden sm:inline-block">
-              QR Digital Menu
-            </span>
-          </div>
-        </Link>
-
+        <Logo />
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-1 lg:gap-2 bg-muted/40 p-1.5 rounded-full border border-border/50 backdrop-blur-xs">
           {navLinks.map((link) => (

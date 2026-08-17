@@ -1,38 +1,57 @@
-import { Link } from '@inertiajs/react';
-import AppLogoIcon from '@/components/app-logo-icon';
-// import { home } from '@/routes';
+import React from 'react';
 import type { AuthLayoutProps } from '@/types';
+import Logo from '@/components/shared/logo';
+import LangToggle from '@/components/shared/lang-toggle';
+import ThemeToggle from '@/components/shared/theme-toggle';
+import useImport from '@/hooks/use-import';
 
 export default function AuthSimpleLayout({
     children,
     title,
     description,
 }: AuthLayoutProps) {
-    return (
-        <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
-            <div className="w-full max-w-sm">
-                <div className="flex flex-col gap-8">
-                    <div className="flex flex-col items-center gap-4">
-                        {/* <Link
-                            href={home()}
-                            className="flex flex-col items-center gap-2 font-medium"
-                        >
-                            <div className="mb-1 flex h-9 w-9 items-center justify-center rounded-md">
-                                <AppLogoIcon className="size-9 fill-current text-[var(--foreground)] dark:text-white" />
-                            </div>
-                            <span className="sr-only">{title}</span>
-                        </Link> */}
+    const { t, isAr } = useImport();
 
-                        <div className="space-y-2 text-center">
-                            <h1 className="text-xl font-medium">{title}</h1>
-                            <p className="text-center text-sm text-muted-foreground">
-                                {description}
-                            </p>
+    const translatedTitle = title ? (t(title) !== title ? t(title) : title) : '';
+    const translatedDescription = description ? (t(description) !== description ? t(description) : description) : '';
+
+    return (
+        <div className="min-h-screen bg-muted/20 dark:bg-background flex flex-col justify-between p-4 sm:p-6" dir={isAr ? 'rtl' : 'ltr'}>
+            {/* Header with Logo and Toggles */}
+            <header className="w-full max-w-4xl mx-auto flex items-center justify-between py-2">
+                <Logo />
+                <div className="flex items-center gap-2">
+                    <LangToggle />
+                    <ThemeToggle />
+                </div>
+            </header>
+
+            {/* Simple Centered Card */}
+            <main className="flex-1 flex items-center justify-center py-8">
+                <div className="w-full max-w-md bg-card border border-border/70 rounded-2xl p-6 sm:p-8 shadow-xs space-y-6">
+                    {(translatedTitle || translatedDescription) && (
+                        <div className="space-y-1 text-center">
+                            {translatedTitle && (
+                                <h1 className="text-xl font-bold text-foreground">
+                                    {translatedTitle}
+                                </h1>
+                            )}
+                            {translatedDescription && (
+                                <p className="text-sm text-muted-foreground">
+                                    {translatedDescription}
+                                </p>
+                            )}
                         </div>
-                    </div>
+                    )}
+
                     {children}
                 </div>
-            </div>
+            </main>
+
+            {/* Simple Footer */}
+            <footer className="text-center text-xs text-muted-foreground py-2">
+                &copy; {new Date().getFullYear()} MenuPro
+            </footer>
         </div>
     );
 }

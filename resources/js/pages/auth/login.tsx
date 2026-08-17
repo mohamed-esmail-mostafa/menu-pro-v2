@@ -1,3 +1,4 @@
+import React from 'react';
 import { Form, Head } from '@inertiajs/react';
 import InputError from '@/components/input-error';
 import PasskeyVerify from '@/components/passkey-verify';
@@ -11,6 +12,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
+import useImport from '@/hooks/use-import';
 
 type Props = {
     status?: string;
@@ -18,9 +20,11 @@ type Props = {
 };
 
 export default function Login({ status, canResetPassword }: Props) {
+    const { t } = useImport();
+
     return (
         <>
-            <Head title="Log in" />
+            <Head title={t('auth.login')} />
 
             <PasskeyVerify />
 
@@ -31,9 +35,10 @@ export default function Login({ status, canResetPassword }: Props) {
             >
                 {({ processing, errors }) => (
                     <>
-                        <div className="grid gap-6">
+                        <div className="grid gap-4">
+                            {/* Email */}
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email">{t('auth.email')}</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -42,21 +47,22 @@ export default function Login({ status, canResetPassword }: Props) {
                                     autoFocus
                                     tabIndex={1}
                                     autoComplete="email"
-                                    placeholder="email@example.com"
+                                    placeholder={t('auth.enter-email')}
                                 />
                                 <InputError message={errors.email} />
                             </div>
 
+                            {/* Password */}
                             <div className="grid gap-2">
-                                <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
+                                <div className="flex items-center justify-between">
+                                    <Label htmlFor="password">{t('auth.password')}</Label>
                                     {canResetPassword && (
                                         <TextLink
                                             href={request()}
-                                            className="ml-auto text-sm"
+                                            className="text-xs"
                                             tabIndex={5}
                                         >
-                                            Forgot your password?
+                                            {t('auth.forgot-password')}
                                         </TextLink>
                                     )}
                                 </div>
@@ -66,36 +72,41 @@ export default function Login({ status, canResetPassword }: Props) {
                                     required
                                     tabIndex={2}
                                     autoComplete="current-password"
-                                    placeholder="Password"
+                                    placeholder={t('auth.enter-password')}
                                 />
                                 <InputError message={errors.password} />
                             </div>
 
-                            <div className="flex items-center space-x-3">
+                            {/* Remember Me */}
+                            <div className="flex items-center space-x-2 rtl:space-x-reverse">
                                 <Checkbox
                                     id="remember"
                                     name="remember"
                                     tabIndex={3}
                                 />
-                                <Label htmlFor="remember">Remember me</Label>
+                                <Label htmlFor="remember" className="cursor-pointer font-normal">
+                                    {t('auth.remember')}
+                                </Label>
                             </div>
 
+                            {/* Submit Button */}
                             <Button
                                 type="submit"
-                                className="mt-4 w-full"
+                                className="mt-2 w-full font-semibold"
                                 tabIndex={4}
                                 disabled={processing}
                                 data-test="login-button"
                             >
-                                {processing && <Spinner />}
-                                Log in
+                                {processing && <Spinner className="mr-2" />}
+                                {processing ? t('auth.logging-in') : t('auth.login')}
                             </Button>
                         </div>
 
+                        {/* Sign Up Redirect */}
                         <div className="text-center text-sm text-muted-foreground">
-                            Don't have an account?{' '}
-                            <TextLink href={register()} tabIndex={5}>
-                                Sign up
+                            {t('auth.no-account')}{' '}
+                            <TextLink href={register()} tabIndex={6} className="font-semibold text-primary">
+                                {t('auth.sign-up')}
                             </TextLink>
                         </div>
                     </>
@@ -103,7 +114,7 @@ export default function Login({ status, canResetPassword }: Props) {
             </Form>
 
             {status && (
-                <div className="mb-4 text-center text-sm font-medium text-green-600">
+                <div className="mt-4 text-center text-sm font-medium text-emerald-600">
                     {status}
                 </div>
             )}
@@ -112,6 +123,6 @@ export default function Login({ status, canResetPassword }: Props) {
 }
 
 Login.layout = {
-    title: 'Log in to your account',
-    description: 'Enter your email and password below to log in',
+    title: 'auth.auth-login',
+    description: 'auth.please-login',
 };
