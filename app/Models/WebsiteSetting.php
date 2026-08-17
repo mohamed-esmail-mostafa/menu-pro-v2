@@ -9,4 +9,6 @@ class WebsiteSetting extends Model
 {
     /** @use HasFactory<\Database\Factories\WebsiteSettingFactory> */
     use HasFactory;
+
+    protected $guarded = [];
 }
