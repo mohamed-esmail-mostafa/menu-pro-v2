@@ -17,11 +17,6 @@ import { toast } from 'sonner'
 
 
 
-
-
-
-
-declare function route(name: string, params?: any): string
 export default function RegisterStore({ countries }: any) {
     const { t, i18n } = useTranslation()
     const { settings }: any = usePage().props;
@@ -119,7 +114,7 @@ export default function RegisterStore({ countries }: any) {
         <PublicLayout>
             <Head title={t('auth.register-store')} />
           
-            <div className="min-h-screen mt-28 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+            <div className="min-h-screen mt-28  flex items-center justify-center p-4">
                 <div className="w-full max-w-2xl">
                     {/* Header */}
                     <div className="text-center mb-8">
@@ -188,6 +183,7 @@ export default function RegisterStore({ countries }: any) {
                                         error={formik.touched.image && formik.errors.image ? String(formik.errors.image) : undefined}
                                         previewClassName="h-40 object-contain"
                                     />
+                                    <InputError message={formik.errors.image} />
 
                                     {/* <ImagePicker
                                         id="banner"

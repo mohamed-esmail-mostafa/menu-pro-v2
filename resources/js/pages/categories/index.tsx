@@ -2,14 +2,11 @@ import { Button } from '@/components/ui/button'
 import useImport from '@/hooks/use-import'
 import StoreDashboardLayout from '@/layouts/store-dashboard-layout'
 import { Store } from '@/types/store'
-import { Edit, ListFilter, Trash2, Search, Plus, Loader2, Sparkles, X, Layers } from 'lucide-react'
+import {Layers } from 'lucide-react'
 import useSelectedStore from '@/hooks/use-selected-store'
 import { Category } from '@/types/category'
-import NoDataFound from '@/components/shared/no-data-found'
-
 import { useState, useMemo } from 'react'
 import { router } from '@inertiajs/react'
-import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
 import StoreCategories from './store-categories'
@@ -17,7 +14,7 @@ import CategoriesSheet from './categories-sheet'
 
 export default function CategoriesPage({ store, categories = [] }: { store: Store, categories: Category[] }) {
     const { t, isAr } = useImport()
-    const { selectedStore, getCurrentStore }: any = useSelectedStore()
+    const {  getCurrentStore }: any = useSelectedStore()
     const currentStore = store || getCurrentStore()
 
     const [searchQuery, setSearchQuery] = useState('')
@@ -35,9 +32,8 @@ export default function CategoriesPage({ store, categories = [] }: { store: Stor
         if (!searchQuery.trim()) return unassignedCategories
         const query = searchQuery.toLowerCase()
         return unassignedCategories.filter((cat) => {
-            const nameAr = (cat.name_ar || cat.name || '').toLowerCase()
-            const nameEn = (cat.name_en || cat.name || '').toLowerCase()
-            return nameAr.includes(query) || nameEn.includes(query)
+            const name = ( cat.name || '').toLowerCase()
+            return name.includes(query)
         })
     }, [unassignedCategories, searchQuery])
 
@@ -75,9 +71,7 @@ export default function CategoriesPage({ store, categories = [] }: { store: Stor
                                 {store?.categories?.length || 0}
                             </Badge>
                         </div>
-                        <p className="text-muted-foreground text-sm mt-1">
-                            {t("dashboard.subtitle")}
-                        </p>
+
                     </div>
 
                     <CategoriesSheet

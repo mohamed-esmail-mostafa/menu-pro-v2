@@ -40,7 +40,7 @@ export default function HeroSection() {
                 size="lg"
                 className="w-full sm:w-auto rounded-full font-bold px-8 h-12 text-sm sm:text-base shadow-lg hover:shadow-primary/25 transition-all gap-2 bg-primary text-primary-foreground"
               >
-                <Link href="/register">
+                <Link href="/register/store/page">
                   <span>{t('home.get-started')}</span>
                   <ArrowRight className="size-4 rtl:rotate-180" />
                 </Link>

@@ -27,10 +27,10 @@ export default function ProductsPage({ store }: { store: Store }) {
     const [editingProduct, setEditingProduct] = useState<Product | null>(null)
     const [deletingId, setDeletingId] = useState<number | null>(null)
     const validationSchema = Yup.object({
-        store_category_id: Yup.mixed().required(t('validations.required-field')),
-        title: Yup.string().required(t('validations.required-field')),
+        store_category_id: Yup.mixed().required(t('validations.required')),
+        title: Yup.string().required(t('validations.required')),
         description: Yup.string().nullable().optional(),
-        price: Yup.number().min(0, t('validations.must-be-positive')).required(t('validations.required-field')),
+        price: Yup.number().min(0, t('validations.must-be-positive')).required(t('validations.required')),
         sale_price: Yup.number().min(0, t('common.must-be-positive')).nullable().optional(),
         is_simple: Yup.boolean().optional(),
         is_featured: Yup.boolean().optional(),
@@ -225,7 +225,7 @@ export default function ProductsPage({ store }: { store: Store }) {
                                     value={formik.values.description}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    placeholder={t('products.description')}
+                                    placeholder={t('common.description')}
                                     rows={3}
                                 />
                             </div>

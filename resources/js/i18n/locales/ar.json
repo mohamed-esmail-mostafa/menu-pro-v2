@@ -88,7 +88,11 @@
         "confirm-password-required": "تأكيد كلمة المرور مطلوب",
         "store-name-required": "اسم المتجر مطلوب",
         "country-required": "الدولة مطلوبة",
-        "google-login": " الدخول باستخدام جوجل "
+        "google-login": " الدخول باستخدام جوجل ",
+        "dashboard":" لوحة ",
+        "admin-dashboard":" لوحة تحكم الادمن ",
+        "store-dashboard":" لوحة تحكم المتجر  ",
+        "profile":" الملف الشخصي "
     },
     "common": {
         "change": "تغيير",
@@ -142,7 +146,13 @@
         "create-success": " تم الانشاء بنجاح ",
         "create-failed": " فشل الانشاء ",
         "logo-slogn": " منصة المنيو الرقمية ",
-         "settings":" الإعدادات "
+        "settings": " الإعدادات ",
+        "categories": " الاقسام ",
+        "countries": " الدول ",
+        "stores": "المتاجر والسوبرماركت",
+        "users": " المستخدمين ",
+        "no-data": " لا توجد بيانات متاحة الان ",
+        "description": " الوصف "
     },
     "nav": {
         "home": "الرئيسية",
@@ -391,7 +401,11 @@
     },
     "tables": {
         "table-name": " اسم الطاولة ",
-        "capacity": " السعة "
+        "capacity": " السعة ",
+        "add-new-table": " اضافة طاولة  ",
+        "enter-table-name": " اكتب اي اسم للطاولة ",
+        "print-qr": "طباعة QR",
+        "view-qr": " عرض QR  "
     },
     "validations": {
         "required": " مطلوب "
@@ -436,5 +450,8 @@
         "saving": "جارٍ حفظ الإعدادات...",
         "success_msg": "تم حفظ إعدادات الموقع بنجاح!",
         "error_msg": "حدث خطأ أثناء حفظ إعدادات الموقع."
+    },
+    "stores": {
+        "edit-details-store": " تعديل تفاصيل المتجر "
     }
 }

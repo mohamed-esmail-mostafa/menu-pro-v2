@@ -8,7 +8,7 @@ import useSelectedStore from '@/hooks/use-selected-store';
 
 export default function Header() {
     const { t } = useImport();
-    const { selectStore, getCurrentStore }: any = useSelectedStore();
+    const { getCurrentStore }: any = useSelectedStore();
     const store = getCurrentStore()
     return (
         <div className="p-6 rounded-3xl bg-card border border-border/70 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">

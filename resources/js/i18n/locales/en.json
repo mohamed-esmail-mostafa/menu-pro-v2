@@ -88,7 +88,11 @@
         "confirm-password-required": "Confirm password is required",
         "store-name-required": "Store name is required",
         "country-required": "Country is required",
-        "google-login": "Login With Google"
+        "google-login": "Login With Google",
+        "dashboard":"Dashboard",
+        "admin-dashboard":"Admin Dashboard",
+        "store-dashboard":"Store Dashboard",
+        "profile":"Profile"
     },
     "common": {
         "change": "Change",
@@ -142,7 +146,13 @@
         "create-success": "Created Successfully",
         "create-failed": "Created Failed",
         "logo-slogn": "QR Digital Menu",
-        "settings":"Setting"
+        "settings":"Setting",
+        "categories":"Categories",
+        "countries":"Countries",
+        "stores":"Stores",
+        "users":"Users",
+        "no-data":"No Data Found",
+        "description":"Description"
     },
     "nav": {
         "home": "Home",
@@ -371,7 +381,11 @@
     },
     "tables": {
         "table-name": "Table Name",
-        "capacity": "Capacity"
+        "capacity": "Capacity",
+        "add-new-table":"Add New Table",
+        "enter-table-name":"Write Any Name For Table",
+        "print-qr":"Print QR Code",
+        "view-qr":"View QR Code"
     },
     "validations": {
         "required": "This Required"
@@ -416,5 +430,9 @@
         "saving": "Saving Settings...",
         "success_msg": "Website settings saved successfully!",
         "error_msg": "An error occurred while saving website settings."
+    },
+    "stores":{
+        "edit-details-store":"Edit Store Details"
+        
     }
 }

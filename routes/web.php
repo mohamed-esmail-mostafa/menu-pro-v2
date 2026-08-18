@@ -21,3 +21,4 @@ require __DIR__.'/categories.php';
 require __DIR__.'/products.php';
 require __DIR__.'/tables.php';
 require __DIR__.'/website-settings.php';
+require __DIR__.'/orders.php';

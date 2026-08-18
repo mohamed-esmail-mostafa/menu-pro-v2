@@ -1,18 +1,9 @@
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { router } from '@inertiajs/react';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {
-    LogOut,
-    Store as StoreIcon,
-} from 'lucide-react';
+import { BookDashedIcon, LogOut, Store as StoreIcon, User } from 'lucide-react';
 import useAuth from '@/hooks/use-auth';
 import { Button } from '../ui/button';
 import useImport from '@/hooks/use-import';
@@ -23,6 +14,8 @@ export default function AuthMenu() {
     const handleLogout = () => {
         router.post('logout');
     };
+
+   
     return (
         <div>
             {auth?.user ? (<DropdownMenu>
@@ -35,6 +28,7 @@ export default function AuthMenu() {
                                 {auth.user.name?.charAt(0).toUpperCase()}
                             </AvatarFallback>
                         </Avatar>
+                         
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align="end" forceMount>
@@ -47,27 +41,25 @@ export default function AuthMenu() {
                         </div>
                     </div>
                     <DropdownMenuSeparator />
-                    {/* {stores?.map((store: Store) => (
-            <DropdownMenuItem asChild>
-              <Link href={route('store.dashboard', store.id)}>
-                <StoreIcon className="mr-2 h-4 w-4" />
-                <span>{store?.name}</span>
-              </Link>
-            </DropdownMenuItem>
-          ))} */}
 
+
+                   
                     <DropdownMenuItem asChild>
-                        {/* <Link href={route('dashboard')}>
-              <LayoutDashboard className="mr-2 h-4 w-4" />
-              <span>{t('header.dashboard')}</span>
-            </Link> */}
+                       
+                        <Link href={`${auth.user.role === "admin" ? "admin/dashboard" : "/vendor/stores/page"}`}>
+                            <BookDashedIcon className="mr-2 h-4 w-4" />
+                            <span>
+                                {`${auth.user.role === "admin" ? t("auth.admin-dashboard") : t("auth.store-dashboard") }`}
+                            </span>
+                        </Link>
                     </DropdownMenuItem>
-                    {/* <DropdownMenuItem asChild>
-            <Link href={route('vendor.profile')}>
-              <User className="mr-2 h-4 w-4" />
-              <span>{t('header.profile')}</span>
-            </Link>
-          </DropdownMenuItem> */}
+                     <DropdownMenuItem asChild>
+                       
+                        <Link href={""}>
+                            <User className="mr-2 h-4 w-4" />
+                            <span>{t('auth.profile')}</span>
+                        </Link>
+                    </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={handleLogout} className="text-red-600 focus:text-red-600">
                         <LogOut className="mr-2 h-4 w-4" />
@@ -75,7 +67,7 @@ export default function AuthMenu() {
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>) : (<>
-            <Button onClick={()=>router.get('login')}>{t('auth.login')}</Button>
+                <Button onClick={() => router.get('login')}>{t('auth.login')}</Button>
             </>)}
         </div>
     )

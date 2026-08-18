@@ -50,30 +50,34 @@ export default function CreateUpdateDialog({ store }: { store: Store }) {
 
 
     const formik = useFormik({
-        initialValues:{
-            store_id:store.id,
+        initialValues: {
+            store_id: store.id,
             name: selectedTable?.name || '',
             capacity: selectedTable?.capacity || 4,
         },
-         validationSchema,
+        validationSchema,
         enableReinitialize: true,
-        onSubmit: async(values)=>{
-           router.post(`/create/store/tables`, values , {
-            onSuccess:()=>{
-                toast.success(t('common.create-success'))
-                formik.resetForm()
-                setShowDialog(false)
-            },
-            onError:(errors:any)=>{
-                 toast.success(t('common.create-error'))
-            },
-           })
+        onSubmit: async (values) => {
+            router.post(`/create/store/tables`, values, {
+                onSuccess: () => {
+                    toast.success(t('common.create-success'))
+                    formik.resetForm()
+                    setShowDialog(false)
+                },
+                onError: (errors: any) => {
+                    toast.success(t('common.create-error'))
+                },
+            })
         }
     })
     return (
         <div>
 
-            <Button onClick={()=>setShowDialog(true)}>Add Table</Button>
+
+            <div>
+
+                <Button onClick={() => setShowDialog(true)}>{t("tables.add-new-table")}</Button>
+            </div>
             <Dialog open={showDialog} onOpenChange={(showDialog) => !showDialog}>
                 <DialogContent className="sm:max-w-[525px]">
                     <DialogHeader>
@@ -122,7 +126,7 @@ export default function CreateUpdateDialog({ store }: { store: Store }) {
                         <div className="flex gap-2 pt-4">
                             <Button
                                 type="button"
-                                onClick={()=>setShowDialog(false)}
+                                onClick={() => setShowDialog(false)}
                                 variant="ghost"
                                 className="flex-1 "
                             >

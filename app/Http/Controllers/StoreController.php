@@ -35,10 +35,11 @@ class StoreController extends Controller
     }
 
 
-    public function update_store_page(int $id)
+    public function update_store_page(string $slug)
     {
-        return Inertia::render("Stores/update", [
-            "store"     => Store::where('id', $id)->first(),
+        $store = Store::where("slug" , $slug)->firstOrFail();
+        return Inertia::render("stores/update",[
+            "store"=>$store,
             "countries" => $this->countryService->getAll(),
         ]);
     }
@@ -74,6 +75,16 @@ class StoreController extends Controller
         return Inertia::render('store-dashboard/index', [
             'store'  => $store,
             'stores' => $stores,
+        ]);
+    }
+
+
+
+
+    public function store_menu($slug)  {
+        $store = Store::with("categories" , "products" , "country")->where("slug" , $slug)->firstOrFail();
+        return Inertia::render("menu/index",[
+            "store"=>$store
         ]);
     }
 }

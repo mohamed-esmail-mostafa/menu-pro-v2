@@ -9,8 +9,12 @@ export default function AdminLayout({children}:{children:React.ReactNode}) {
   const { t } = useImport()
 
   const tabs = [
-    { id: 'overview', label: t('store_dashboard.tab-overview'), icon: LayoutDashboard,href: "#" },
+    { id: 'overview', label: t('store_dashboard.tab-overview'), icon: LayoutDashboard,href: "/admin/dashboard" },
     { id: 'settings', label: t('common.settings'), icon: Settings, href: "/admin/website/setting" },
+    { id: 'categories', label: t('common.categories'), icon: Settings, href: "/admin/categories/page" },
+    { id: 'countries', label: t('common.countries'), icon: Settings, href: "/admin/countries/page" },
+    { id: 'stores', label: t('common.stores'), icon: Settings, href: "/admin/categories/page" },
+    { id: 'users', label: t('common.users'), icon: Settings, href: "/admin/categories/page" },
   ]
   return (
     <div className="flex h-full flex-1 flex-col gap-6 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">

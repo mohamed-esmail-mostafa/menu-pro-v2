@@ -5,6 +5,7 @@ import { Table } from "./table";
 
 export interface Store {
     id: number;
+    country_id:number;
     name: string;
     slug: string;
     description: string;
@@ -12,6 +13,7 @@ export interface Store {
     image: string | null;
     address: string | null;
     phone: string | null;
+    email: string | null;
     is_verified: number;
     categories: Category[];
     products?: Product[];
