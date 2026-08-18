@@ -152,7 +152,8 @@
         "stores":"Stores",
         "users":"Users",
         "no-data":"No Data Found",
-        "description":"Description"
+        "description":"Description",
+        "search":"Search for what you need"
     },
     "nav": {
         "home": "Home",
@@ -432,7 +433,8 @@
         "error_msg": "An error occurred while saving website settings."
     },
     "stores":{
-        "edit-details-store":"Edit Store Details"
+        "edit-details-store":"Edit Store Details",
+        "add-new-store":"Add New Store"
         
     }
 }

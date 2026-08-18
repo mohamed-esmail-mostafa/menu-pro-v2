@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Country;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Table;
 use App\Models\User;
@@ -66,5 +67,9 @@ class Store extends Model
 
     public function tables(){
         return $this->hasMany(Table::class);
+    }
+
+    public function orders(){
+         return $this->hasMany(Order::class);
     }
 }
