@@ -7,15 +7,16 @@ import useAuth from '@/hooks/use-auth';
 import { Button } from '../ui/button';
 import useImport from '@/hooks/use-import';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
+import { logout } from '@/routes';
 
 export default function AuthMenu() {
     const { auth } = useAuth()
     const { t } = useImport();
     const cleanup = useMobileNavigation();
-    
+
     const handleLogout = () => {
         // router.post('/logout');
-         cleanup();
+        cleanup();
         router.flushAll();
     };
 
@@ -31,7 +32,7 @@ export default function AuthMenu() {
                                 {auth.user.name?.charAt(0).toUpperCase()}
                             </AvatarFallback>
                         </Avatar>
-                         
+
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align="end" forceMount>
@@ -46,18 +47,18 @@ export default function AuthMenu() {
                     <DropdownMenuSeparator />
 
 
-                   
+
                     <DropdownMenuItem asChild>
-                       
+
                         <Link href={`${auth.user.role === "admin" ? "admin/dashboard" : "/vendor/stores/page"}`}>
                             <BookDashedIcon className="mr-2 h-4 w-4" />
                             <span>
-                                {`${auth.user.role === "admin" ? t("auth.admin-dashboard") : t("auth.store-dashboard") }`}
+                                {`${auth.user.role === "admin" ? t("auth.admin-dashboard") : t("auth.store-dashboard")}`}
                             </span>
                         </Link>
                     </DropdownMenuItem>
-                     <DropdownMenuItem asChild>
-                       
+                    <DropdownMenuItem asChild>
+
                         <Link href={""}>
                             <User className="mr-2 h-4 w-4" />
                             <span>{t('auth.profile')}</span>
@@ -65,8 +66,18 @@ export default function AuthMenu() {
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={handleLogout} className="text-red-600 focus:text-red-600">
-                        <LogOut className="mr-2 h-4 w-4" />
-                        <span>{t('auth.logout')}</span>
+                        {/* <LogOut className="mr-2 h-4 w-4" />
+                        <span>{t('auth.logout')}</span> */}
+                        <Link
+                            className="block w-full cursor-pointer"
+                            href={logout()}
+                            as="button"
+                            onClick={handleLogout}
+                            data-test="logout-button"
+                        >
+                            <LogOut className="mr-2" />
+                            Log out
+                        </Link>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>) : (<>
