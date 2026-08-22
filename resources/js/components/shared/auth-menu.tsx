@@ -1,5 +1,4 @@
 import { Link, usePage } from '@inertiajs/react';
-import { useTranslation } from 'react-i18next';
 import { router } from '@inertiajs/react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -7,15 +6,19 @@ import { BookDashedIcon, LogOut, Store as StoreIcon, User } from 'lucide-react';
 import useAuth from '@/hooks/use-auth';
 import { Button } from '../ui/button';
 import useImport from '@/hooks/use-import';
+import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 
 export default function AuthMenu() {
     const { auth } = useAuth()
     const { t } = useImport();
+    const cleanup = useMobileNavigation();
+    
     const handleLogout = () => {
-        router.post('logout');
+        // router.post('/logout');
+         cleanup();
+        router.flushAll();
     };
 
-   
     return (
         <div>
             {auth?.user ? (<DropdownMenu>
