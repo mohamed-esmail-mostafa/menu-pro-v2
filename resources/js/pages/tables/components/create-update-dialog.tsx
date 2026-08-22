@@ -1,84 +1,75 @@
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useTranslation } from 'react-i18next'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { router } from '@inertiajs/react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import useImport from '@/hooks/use-import'
 import { Store } from '@/types/store'
-import { useState } from 'react'
 import { Table } from '@/types/table'
 import InputError from '@/components/input-error'
 import { toast } from 'sonner'
 
+interface CreateUpdateDialogProps{
+    store: Store,
+    showDialog: any, 
+    setShowDialog: any, 
+    selectedTable?: Table | null
+}
+export default function CreateUpdateDialog({ store, showDialog, setShowDialog, selectedTable }: CreateUpdateDialogProps) {
 
-export default function CreateUpdateDialog({ store }: { store: Store }) {
-    const { t } = useImport()
-    const [showDialog, setShowDialog] = useState(false)
-    const [selectedTable, setSelectedTable] = useState<Table | null>(null)
-
+    const { t } = useImport();
 
     const validationSchema = Yup.object({
         name: Yup.string().required(t('validations.required')),
-        capacity: Yup.number().required(t('validations.required')).min(1, t('validations.capacity-min')).integer(t('validations.capacity-integer')),
+        capacity: Yup.number()
+            .required(t('tables.capacity-required'))
+            .min(1, t('tables.capacity-min'))
+            .integer(t('tables.capacity-integer')),
     })
-
-    // const formik = useFormik({
-    //     initialValues: {
-    //         store_id:store.id,
-    //         name: selectedTable?.name || '',
-    //         capacity: selectedTable?.capacity || 4,
-    //     },
-    //     validationSchema,
-    //     enableReinitialize: true,
-    //     onSubmit: (values) => {
-
-
-    //          router.post(`/create/store/tables`), values, {
-    //                 onSuccess: () => {
-    //                     formik.resetForm()
-    //                 },
-    //                 onError: (errors:any) => {
-    //                     console.error('Creation failed:', errors)
-    //                 }
-    //             })
-    //         }}
-    //     },
-    // })
-
-
     const formik = useFormik({
         initialValues: {
-            store_id: store.id,
+            store_id: store?.id,
             name: selectedTable?.name || '',
             capacity: selectedTable?.capacity || 4,
         },
         validationSchema,
         enableReinitialize: true,
-        onSubmit: async (values) => {
-            router.post(`/create/store/tables`, values, {
-                onSuccess: () => {
-                    toast.success(t('common.create-success'))
-                    formik.resetForm()
-                    setShowDialog(false)
-                },
-                onError: (errors: any) => {
-                    toast.success(t('common.create-error'))
-                },
-            })
+        onSubmit: (values) => {
+            if (selectedTable) {
+                router.put(`/store/tables/${selectedTable.id}`, values, {
+                    onSuccess: () => {
+                        toast.success(t('common.success'))
+                        formik.resetForm()
+                        setShowDialog(false)
+                    },
+                    onError: () => {
+                        toast.success(t('common.error'))
+                    }
+                })
+             } else {
+                alert("Create noew")
+                router.post(`/create/store/tables`, values, {
+                    onSuccess: () => {
+                        toast.success(t('common.success'))
+                        formik.resetForm()
+                        setShowDialog(false)
+                    },
+                    onError: () => {
+                        toast.success(t('common.error'))
+                    }
+                })
+            }
         }
     })
+
     return (
         <div>
 
 
-            <div>
 
-                <Button onClick={() => setShowDialog(true)}>{t("tables.add-new-table")}</Button>
-            </div>
-            <Dialog open={showDialog} onOpenChange={(showDialog) => !showDialog}>
+            <Dialog open={showDialog} onOpenChange={() => setShowDialog(false)}>
                 <DialogContent className="sm:max-w-[525px]">
                     <DialogHeader>
                         <DialogTitle>
@@ -137,7 +128,7 @@ export default function CreateUpdateDialog({ store }: { store: Store }) {
                                 disabled={formik.isSubmitting}
                                 className="flex-1"
                             >
-                                gfg
+                                {t("common.save")}
                                 {/* {formik.isSubmitting ? t('common.saving') : isEdit ? t('common.update') : t('common.save')} */}
                             </Button>
                         </div>

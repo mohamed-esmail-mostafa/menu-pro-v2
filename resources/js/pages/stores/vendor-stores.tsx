@@ -16,7 +16,7 @@ export default function VendorStores() {
     const handleSelectStore = async (store: Store) => {
         selectStore(store)
         const currentStore = getCurrentStore()
-        router.get(`/store/dashboard/${currentStore?.id}`)
+        router.get(`/store/dashboard/${currentStore?.slug}`)
 
     }
     return (

@@ -6,12 +6,14 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import LangToggle from '@/components/shared/lang-toggle'
 import ThemeToggle from '@/components/shared/theme-toggle'
+import useWebsiteSetting from '@/hooks/use-website-setting'
+import Logo from './logo'
 
 export default function Footer() {
   const { t } = useTranslation()
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
-
+  const {settings}=useWebsiteSetting()
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault()
     if (email) {
@@ -30,16 +32,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-border/50">
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="size-10 rounded-xl bg-gradient-to-tr from-primary to-emerald-500 p-0.5 shadow-md">
-                <div className="size-full bg-background rounded-[10px] flex items-center justify-center">
-                  <QrCode className="size-5 text-primary" />
-                </div>
-              </div>
-              <span className="font-extrabold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground/90 to-primary">
-                Menu<span className="text-primary">Pro</span>
-              </span>
-            </Link>
+           <Logo />
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
               {t('footer.tagline')}
             </p>

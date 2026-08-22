@@ -1,26 +1,33 @@
 import StoreDashboardLayout from '@/layouts/store-dashboard-layout'
-import { Product } from '@/types/product'
+
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { useState } from 'react'
-import useImport from '@/hooks/use-import'
+
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
 import { router } from '@inertiajs/react'
 import InputError from '@/components/input-error'
 import { Loader2, Plus, Edit, Trash2, Utensils, Tag, Sparkles, Star } from 'lucide-react'
 import ImagePicker from '@/components/ui/image-picker'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Store } from '@/types/store'
-import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
 import ProductsTable from './components/products-table'
+import { Attribute } from '@/types/attributes'
+import PageHeader from '@/components/shared/page-header'
+import useCreateUpdateProduct from './hooks/use-create-update-product'
+import CreateUpdateDialog from '../tables/components/create-update-dialog'
+import useImport from '@/hooks/use-import'
+import { useState } from 'react'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { Product } from '@/types/product'
 
-export default function ProductsPage({ store }: { store: Store }) {
+export default function ProductsPage({ store, attributes, products }: { store: Store, attributes: Attribute[], products: any }) {
+
+
     const { t, isAr } = useImport()
     const [openDialog, setOpenDialog] = useState(false)
     const [imageFile, setImageFile] = useState<File | null>(null)
@@ -70,20 +77,22 @@ export default function ProductsPage({ store }: { store: Store }) {
                 formData.append('_method', 'PUT')
                 router.post(`/store/product/update/${editingProduct.id}`, formData, {
                     onSuccess: () => {
-                        toast.success(t('products.updated-success') || (isAr ? 'تم تحديث المنتج بنجاح' : 'Product updated successfully'))
+                        toast.success(t('common.success'))
                         handleCloseDialog()
                     },
                     onError: (errors) => {
+                        toast.error(t('common.error'))
                         formik.setErrors(errors)
                     },
                 })
             } else {
                 router.post('/store/product/store', formData, {
                     onSuccess: () => {
-                        toast.success(t('products.created-success') || (isAr ? 'تم إنشاء المنتج بنجاح' : 'Product created successfully'))
+                        toast.success(t('common.success'))
                         handleCloseDialog()
                     },
                     onError: (errors: any) => {
+                        toast.error(t('common.error'))
                         formik.setErrors(errors)
                     },
                 })
@@ -111,47 +120,31 @@ export default function ProductsPage({ store }: { store: Store }) {
         formik.resetForm()
     }
 
-    const handleDeleteProduct = (productId: number) => {
-        if (confirm(t('products.confirm-delete') || (isAr ? 'هل أنت متأكد من حذف هذا المنتج؟' : 'Are you sure you want to delete this product?'))) {
-            setDeletingId(productId)
-            router.delete(`/store/product/delete/${productId}`, {
-                onSuccess: () => {
-                    toast.success(t('products.deleted-success') || (isAr ? 'تم حذف المنتج بنجاح' : 'Product deleted successfully'))
-                },
-                onFinish: () => {
-                    setDeletingId(null)
-                },
-            })
-        }
-    }
+
+
+
+
 
     return (
         <StoreDashboardLayout>
             <div className="space-y-6">
                 {/* Top Header */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b">
-                    <div>
-                        <div className="flex items-center gap-2">
-                            <Utensils className="w-6 h-6 text-primary" />
-                            <h1 className="text-2xl font-bold tracking-tight">
-                                {t('store_dashboard.products.title')}
-                            </h1>
-                            <Badge variant="outline" className="ml-2 font-mono">
-                                {store?.products?.length || 0}
-                            </Badge>
-                        </div>
-                        <p className="text-muted-foreground text-sm mt-1">
-                            {t('store_dashboard.products.subtitle')}
-                        </p>
-                    </div>
 
-                    <Button onClick={handleOpenCreate} className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium shadow-sm">
+                <PageHeader
+                    icon={<Utensils className="w-6 h-6 text-primary" />}
+                    title={t('store_dashboard.products.title')}
+                    subtitle={t('store_dashboard.products.subtitle')}
+                    count={store?.products?.length || 0}
+                >
+                    <Button onClick={() => setOpenDialog(true)} className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium shadow-sm">
                         <Plus className="w-4 h-4 mr-2" />
                         {t('store_dashboard.products.add-new')}
                     </Button>
-                </div>
+                </PageHeader>
 
                 {/* Create/Edit Product Dialog */}
+
+
                 <Dialog open={openDialog} onOpenChange={(open) => !open && handleCloseDialog()}>
                     <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto p-6 rounded-2xl">
                         <DialogHeader>
@@ -167,7 +160,7 @@ export default function ProductsPage({ store }: { store: Store }) {
                         </DialogHeader>
 
                         <form onSubmit={formik.handleSubmit} className="space-y-4 mt-2">
-                            {/* Category Selection */}
+                           
                             <div className="space-y-1.5">
                                 <Label htmlFor="store_category_id" className="text-xs font-semibold">
                                     {t('store_dashboard.products.select-category')} <span className="text-destructive">*</span>
@@ -196,7 +189,7 @@ export default function ProductsPage({ store }: { store: Store }) {
                                 )}
                             </div>
 
-                            {/* Product Title */}
+                       
                             <div className="space-y-1.5">
                                 <Label htmlFor="title" className="text-xs font-semibold">
                                     {t('store_dashboard.products.product-title')} <span className="text-destructive">*</span>
@@ -214,7 +207,7 @@ export default function ProductsPage({ store }: { store: Store }) {
                                 )}
                             </div>
 
-                            {/* Description */}
+                        
                             <div className="space-y-1.5">
                                 <Label htmlFor="description" className="text-xs font-semibold">
                                     {t('store_dashboard.products.description')}
@@ -230,7 +223,7 @@ export default function ProductsPage({ store }: { store: Store }) {
                                 />
                             </div>
 
-                            {/* Price and Sale Price */}
+                            
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-1.5">
                                     <Label htmlFor="price" className="text-xs font-semibold">
@@ -271,7 +264,7 @@ export default function ProductsPage({ store }: { store: Store }) {
                                 </div>
                             </div>
 
-                            {/* Options Checkboxes */}
+                          
                             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-3 bg-muted/40 rounded-xl border">
                                 <div className="flex items-center space-x-2 rtl:space-x-reverse">
                                     <Checkbox
@@ -296,7 +289,7 @@ export default function ProductsPage({ store }: { store: Store }) {
                                 </div>
                             </div>
 
-                            {/* Image Upload */}
+                          
                             <div className="space-y-1.5">
                                 <ImagePicker
                                     id="product-image"
@@ -306,7 +299,7 @@ export default function ProductsPage({ store }: { store: Store }) {
                                 />
                             </div>
 
-                            {/* Dialog Form Actions */}
+                           
                             <div className="flex justify-end gap-3 pt-4 border-t">
                                 <Button
                                     type="button"
@@ -314,7 +307,7 @@ export default function ProductsPage({ store }: { store: Store }) {
                                     onClick={handleCloseDialog}
                                     disabled={formik.isSubmitting}
                                 >
-                                    {t('common.cancel') || (isAr ? 'إلغاء' : 'Cancel')}
+                                    {t('common.cancel')}
                                 </Button>
 
                                 <Button
@@ -337,9 +330,11 @@ export default function ProductsPage({ store }: { store: Store }) {
                 {/* Products Grid */}
                 <ProductsTable
                     store={store}
+                    products={products}
                     handleOpenEdit={handleOpenEdit}
-                    handleDeleteProduct={handleDeleteProduct}
-                    deletingId={deletingId} />
+                    deletingId={deletingId}
+                    attributes={attributes}
+                />
             </div>
         </StoreDashboardLayout>
     )

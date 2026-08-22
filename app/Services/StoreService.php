@@ -142,4 +142,47 @@ class StoreService
         $stores = $user->stores;
         return $stores;
     }
+
+
+    public function getStoreProducts(string $slug){
+        $store = Store::where('slug', $slug)->firstOrFail();
+         
+        $products = $store->products->map(function($product){
+            return [
+                ...$product->toArray(),
+                "attributes"=> $product->productAttributes->map(function($productAttribute){
+                    
+                    return [
+                        // "productAttribute"=>$productAttribute,
+                        "id"=>$productAttribute->id,
+                        "name"=>$productAttribute["attribute"]["name"],
+                        "values"=>$productAttribute->values->map(function($value){
+                            return [
+                                'id'=>$value->id,
+                                'product_attribute_id'=>$value->product_attribute_id,
+                                'value'=>$value->value,
+                                'price'=>$value->price,
+                                "is_default"=>$value->is_default,
+                                "is_required"=>$value->is_required
+                            ];
+                        })
+                    ];
+                })
+            ];
+        });
+
+        return $products;
+    }
+
+    public function getStoreCategories(string $slug){
+        $store = Store::where('slug', $slug)->firstOrFail();
+        $categories = $store->categories;
+        return $categories;
+    }
+
+
+    public function getStore(string $slug){
+       $store = Store::with(["country"])->where('slug', $slug)->firstOrFail();
+       return $store;
+    }
 }

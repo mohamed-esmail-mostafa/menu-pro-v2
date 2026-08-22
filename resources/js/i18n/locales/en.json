@@ -153,7 +153,22 @@
         "users":"Users",
         "no-data":"No Data Found",
         "description":"Description",
-        "search":"Search for what you need"
+        "search":"Search for what you need",
+        "products":"Products",
+        "orders":"Orders",
+        "add-attributes":"Add Attributes",
+        "value":"Value",
+        "price":"Price",
+        "select-attribute":"Select Attribute",
+        "delete-confirm":"Are You Sure To Delete This item ? ",
+        "download":"Download",
+        "print":"Print",
+        "view-cart":"View Cart",
+        "discount":"Discount",
+        "light":"Light Mode",
+        "dark":"Dark Mode",
+        "system":"Default Mode"
+       
     },
     "nav": {
         "home": "Home",
@@ -386,7 +401,10 @@
         "add-new-table":"Add New Table",
         "enter-table-name":"Write Any Name For Table",
         "print-qr":"Print QR Code",
-        "view-qr":"View QR Code"
+        "view-qr":"View QR Code",
+        "tables-title":"Tables",
+        "tables-subtitle":"Manage your Tables With QR Code",
+        "scan-to-order":"Scan To Order"
     },
     "validations": {
         "required": "This Required"

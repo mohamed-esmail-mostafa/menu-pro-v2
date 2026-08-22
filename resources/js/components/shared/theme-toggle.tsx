@@ -8,10 +8,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
+import useImport from '@/hooks/use-import'
 
 export default function ThemeToggle() {
   const { appearance, resolvedAppearance, updateAppearance } = useAppearance()
-
+  const { t } = useImport();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -35,21 +36,21 @@ export default function ThemeToggle() {
           className={`flex items-center gap-2 cursor-pointer rounded-lg ${appearance === 'light' ? 'bg-accent font-semibold text-primary' : ''}`}
         >
           <Sun className="h-4 w-4 text-amber-500" />
-          <span>Light</span>
+          <span>{t("common.light")}</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => updateAppearance('dark')}
           className={`flex items-center gap-2 cursor-pointer rounded-lg ${appearance === 'dark' ? 'bg-accent font-semibold text-primary' : ''}`}
         >
           <Moon className="h-4 w-4 text-emerald-400" />
-          <span>Dark</span>
+          <span>{t("common.dark")}</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => updateAppearance('system')}
           className={`flex items-center gap-2 cursor-pointer rounded-lg ${appearance === 'system' ? 'bg-accent font-semibold text-primary' : ''}`}
         >
           <Laptop className="h-4 w-4 text-muted-foreground" />
-          <span>System</span>
+          <span>{t("common.system")}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

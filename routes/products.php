@@ -8,4 +8,10 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('/store/product/store', 'store_products_to_store')->name('store.product.store')->middleware('auth');
     Route::put('/store/product/update/{id}', 'update_product')->name('store.product.update')->middleware('auth');
     Route::delete('/store/product/delete/{id}', 'delete_product')->name('store.product.delete')->middleware('auth');
+
+
+
+
+    Route::post("/add/product/attributes" , "add_product_attributes")->middleware('auth');
+    Route::delete("/delete/product/attributes/{id}" , "remove_product_attribute")->middleware('auth');
 });

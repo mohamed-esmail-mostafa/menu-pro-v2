@@ -3,13 +3,15 @@ import { Category } from '@/types/category';
 import { useTranslation } from 'react-i18next';
 import { Utensils } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
+import useImport from '@/hooks/use-import';
+import CategoryChip from './category-chip';
 
 interface CategoryTabsProps {
     categories: Category[];
     selectedCategory: number | 'all';
     onSelectCategory: (id: number | 'all') => void;
     totalProducts: number;
-    categoryCounts: Record<number | string, number>;
+    // categoryCounts: Record<number | string, number>;
 }
 
 export const CategoryTabs: React.FC<CategoryTabsProps> = ({
@@ -17,10 +19,9 @@ export const CategoryTabs: React.FC<CategoryTabsProps> = ({
     selectedCategory,
     onSelectCategory,
     totalProducts,
-    categoryCounts,
+    // categoryCounts,
 }) => {
-    const { i18n } = useTranslation();
-    const isAr = i18n.language === 'ar';
+   const {isAr,t}=useImport()
 
     const [emblaRef, emblaApi] = useEmblaCarousel({
         align: 'start',
@@ -55,8 +56,8 @@ export const CategoryTabs: React.FC<CategoryTabsProps> = ({
                                     : 'bg-muted/40 text-muted-foreground border-transparent hover:bg-muted hover:text-foreground'
                             }`}
                         >
-                            <Utensils className="w-3.5 h-3.5" />
-                            <span>{isAr ? 'جميع الأقسام' : 'All Categories'}</span>
+                            <Utensils className="w-5 h-5" />
+                            <span>{t('common.categories')}</span>
                             <span
                                 className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${
                                     selectedCategory === 'all'
@@ -67,46 +68,9 @@ export const CategoryTabs: React.FC<CategoryTabsProps> = ({
                                 {totalProducts}
                             </span>
                         </button>
-
-                        {/* Category List */}
-                        {categories.map((cat) => {
-                            const catId = cat.pivot?.id ?? cat.id;
-                            const isSelected = selectedCategory === catId;
-                            const name = cat.pivot?.name || cat.name;
-                            const count = categoryCounts[catId] || 0;
-
-                            return (
-                                <button
-                                    key={catId}
-                                    onClick={() => onSelectCategory(catId)}
-                                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 border shrink-0 ${
-                                        isSelected
-                                            ? 'bg-primary text-primary-foreground border-primary shadow-xs scale-102'
-                                            : 'bg-muted/40 text-muted-foreground border-transparent hover:bg-muted hover:text-foreground'
-                                    }`}
-                                >
-                                    {cat.image && (
-                                        <img
-                                            src={cat.image}
-                                            alt={name}
-                                            className="w-4 h-4 rounded-full object-cover"
-                                        />
-                                    )}
-                                    <span>{name}</span>
-                                    {count > 0 && (
-                                        <span
-                                            className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${
-                                                isSelected
-                                                    ? 'bg-primary-foreground/20 text-primary-foreground'
-                                                    : 'bg-muted-foreground/15 text-muted-foreground'
-                                            }`}
-                                        >
-                                            {count}
-                                        </span>
-                                    )}
-                                </button>
-                            );
-                        })}
+                        {categories.map((cat) =>(
+                            <CategoryChip cat={cat} selectedCategory={selectedCategory} onSelectCategory={onSelectCategory} />
+                        ))}
                     </div>
                 </div>
             </div>

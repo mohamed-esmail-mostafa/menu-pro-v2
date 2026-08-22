@@ -89,10 +89,10 @@
         "store-name-required": "اسم المتجر مطلوب",
         "country-required": "الدولة مطلوبة",
         "google-login": " الدخول باستخدام جوجل ",
-        "dashboard":" لوحة ",
-        "admin-dashboard":" لوحة تحكم الادمن ",
-        "store-dashboard":" لوحة تحكم المتجر  ",
-        "profile":" الملف الشخصي "
+        "dashboard": " لوحة ",
+        "admin-dashboard": " لوحة تحكم الادمن ",
+        "store-dashboard": " لوحة تحكم المتجر  ",
+        "profile": " الملف الشخصي "
     },
     "common": {
         "change": "تغيير",
@@ -153,7 +153,21 @@
         "users": " المستخدمين ",
         "no-data": " لا توجد بيانات متاحة الان ",
         "description": " الوصف ",
-         "search":" ابحث عن ما تريد "
+        "search": " ابحث عن ما تريد ",
+        "products": " المنتجات ",
+        "orders": " الطلبات ",
+        "add-attributes": " اضافة خيارات ",
+        "value": " القيمة ",
+        "price": "السعر",
+        "select-attribute": " اختر الخاصية ",
+        "delete-confirm":" هل انت متاكد من مسح هذا العنصر ؟   ",
+         "download":" تنزيل ",
+        "print":" طباعة ",
+        "view-cart":" عرض سلة الطلبات ",
+        "discount":" خصم ",
+        "light":" الوضع الفاتح ",
+        "dark":" الوضع الليلي ",
+        "system":" الوضع الافتراضي "
     },
     "nav": {
         "home": "الرئيسية",
@@ -406,7 +420,8 @@
         "add-new-table": " اضافة طاولة  ",
         "enter-table-name": " اكتب اي اسم للطاولة ",
         "print-qr": "طباعة QR",
-        "view-qr": " عرض QR  "
+        "view-qr": " عرض QR  ",
+        "scan-to-order":" امسح QR للطلب "
     },
     "validations": {
         "required": " مطلوب "
@@ -454,6 +469,6 @@
     },
     "stores": {
         "edit-details-store": " تعديل تفاصيل المتجر ",
-         "add-new-store":" اضافة متجر جديد "
+        "add-new-store": " اضافة متجر جديد "
     }
 }

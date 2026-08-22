@@ -3,9 +3,11 @@ import { Link } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, QrCode, Sparkles, Smartphone, CheckCircle2, Star, Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import useAuth from '@/hooks/use-auth'
 
 export default function HeroSection() {
   const { t } = useTranslation()
+  const {auth}=useAuth()
 
   return (
     <section className="relative overflow-hidden py-12 md:py-20 lg:py-28">

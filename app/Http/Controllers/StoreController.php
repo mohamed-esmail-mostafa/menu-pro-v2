@@ -7,8 +7,6 @@ use App\Http\Requests\UpdateStoreRequest;
 use App\Models\Store;
 use App\Services\CountryService;
 use App\Services\StoreService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class StoreController extends Controller
@@ -21,10 +19,7 @@ class StoreController extends Controller
 
     public function register_store_page()
     {
-        $countries = $this->countryService->getAll();
-        return Inertia::render("stores/create", [
-            'countries' => $countries,
-        ]);
+        return Inertia::render("stores/create", ['countries' => $this->countryService->getAll()]);
     }
 
 
@@ -62,29 +57,30 @@ class StoreController extends Controller
         ]);
     }
 
-    public function store_dashboard($storeId = null)
+    public function store_dashboard(string $slug)
     {
-        $stores = $this->storeService->getAuthStores();
-        $store = null;
-        if ($storeId) {
-            $store = Store::find($storeId);
-        } else if (count($stores) > 0) {
-            $store = $stores[0];
-        }
 
-        return Inertia::render('store-dashboard/index', [
-            'store'  => $store,
-            'stores' => $stores,
+        $store = Store::withCount(["categories","products" , "orders"])->where('slug',$slug)->firstOrFail();
+         return Inertia::render('store-dashboard/index', [
+            "statistics"=>[
+                "categories_count"=>$store->categories_count,
+                "products_count"=>$store->products_count,
+                "orders_count"=>$store->orders_count,
+            ]
         ]);
+      
     }
 
 
 
 
-    public function store_menu($slug)  {
-        $store = Store::with("categories" , "products" , "country")->where("slug" , $slug)->firstOrFail();
+    public function store_menu(string $slug)  {
+        
+        // $store = Store::with("categories" , "products" , "country")->where("slug" , $slug)->firstOrFail();
         return Inertia::render("menu/index",[
-            "store"=>$store
+            "store"=>$this->storeService->getStore($slug),
+            "products" => $this->storeService->getStoreProducts($slug),
+            "categories" => $this->storeService->getStoreCategories($slug),
         ]);
     }
 }

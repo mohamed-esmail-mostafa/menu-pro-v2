@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Heart, Plus, Minus, ShoppingBag, UtensilsCrossed } from 'lucide-react';
+import useImport from '@/hooks/use-import';
 
 interface ProductDetailModalProps {
     product: Product | null;
@@ -15,6 +16,8 @@ interface ProductDetailModalProps {
     quantityInCart: number;
     onAddToCart: (product: Product, quantity: number) => void;
     onToggleWishlist: (product: Product) => void;
+    handleChangeOption:any;
+    selected_options:any
 }
 
 export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
@@ -26,9 +29,10 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
     quantityInCart,
     onAddToCart,
     onToggleWishlist,
+    handleChangeOption,
+    selected_options
 }) => {
-    const { i18n } = useTranslation();
-    const isAr = i18n.language === 'ar';
+    const { i18n,isAr } = useImport();
     const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
@@ -49,7 +53,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
     const totalPrice = (unitPrice * quantity).toFixed(2);
 
     const handleAdd = () => {
-        onAddToCart(product, quantity);
+        onAddToCart(product, quantity );
         onClose();
     };
 
@@ -117,6 +121,25 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                             {product.description}
                         </div>
                     )}
+
+
+                    <div>
+                        {product.attributes.map((attribute)=>(
+                            <div className='mb-4'>
+                              <h5 className='mb-2'>{attribute.name}</h5>
+                            
+                              <div className='flex items-center gap-4'>
+                                {attribute.values.map((value:any)=>(
+                                    <button 
+                                      className={` ${selected_options[attribute.id]===value.id ? 'bg-primary text-white':'bg-gray-100'} border p-2 rounded-md flex gap-3`} onClick={()=>handleChangeOption(attribute.id , value.id)}>
+                                        <p className='text-xs'> {value.value}</p>
+                                        <p className='text-xs'>{value.price}{currency}</p>
+                                    </button>
+                                ))}
+                              </div>
+                            </div>
+                        ))}
+                    </div>
 
                     {/* Quantity Stepper & Add Button */}
                     <div className="pt-4 border-t border-border flex items-center justify-between gap-4">

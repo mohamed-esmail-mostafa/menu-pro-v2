@@ -3,21 +3,60 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductAttribute;
+use App\Models\ProductAttributeValue;
 use App\Models\Store;
 use App\Models\StoreCategory;
+use App\Services\AttributeService;
 use App\Services\ProductService;
+use App\Services\StoreService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use SpomkyLabs\Pki\X501\ASN1\AttributeValue\AttributeValue;
 
 class ProductController extends Controller
 {
 
-    public function __construct(protected ProductService $productService){}
+    public function __construct(
+        protected ProductService $productService , 
+        protected AttributeService $attributeService,
+        protected StoreService $storeService
+    ){}
+    
+    
+    
     public function store_products_page(string $slug)
     {
-        $store = Store::with(['categories', 'products' , 'country'])->where('slug', $slug)->firstOrFail();
+
+
+
+        // $store = Store::with(['categories', 'products.productAttributes.attribute' , 'products.productAttributes.values' , 'country'])->where('slug', $slug)->firstOrFail();
+       
+       
+        // $products = $store->products->map(function($product){
+        //     return [
+        //         "product"=>$product,
+        //         "attributes"=> $product->productAttributes->map(function($productAttribute){
+                    
+        //             return [
+        //                 // "productAttribute"=>$productAttribute,
+        //                 "id"=>$productAttribute->id,
+        //                 "name"=>$productAttribute["attribute"]["name"],
+        //                 "values"=>$productAttribute->values->map(function($value){
+        //                     return [
+        //                         'id'=>$value->id,
+        //                         'value'=>$value->value,
+        //                     ];
+        //                 })
+        //             ];
+        //         })
+        //     ];
+        // });
         return Inertia::render('products/index', [
-            'store' => $store,
+            'store' => $this->storeService->getStore($slug),
+            'products'=> $this->storeService->getStoreProducts($slug),
+            'attributes' => $this->attributeService->getAllAttributes(),
         ]);
     }
 
@@ -77,6 +116,21 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $product->delete();
+        return redirect()->back();
+    }
+
+
+
+
+    public function add_product_attributes(Request $request){
+      $this->productService->add_product_attributes($request);
+      return redirect()->back();
+    }
+
+
+    public function remove_product_attribute(int $id){
+        $product_value = ProductAttributeValue::findOrFail($id);
+        $product_value->delete();
         return redirect()->back();
     }
 }

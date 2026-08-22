@@ -1,3 +1,4 @@
+import { Attribute } from "./attributes";
 import { Category } from "./category";
 
 export interface Product {
@@ -14,4 +15,6 @@ export interface Product {
     is_simple?: boolean;
     storeCategory?: any;
     category?: Category;
+    product_attributes:Attribute[]
+    attributes:Attribute[]
 }

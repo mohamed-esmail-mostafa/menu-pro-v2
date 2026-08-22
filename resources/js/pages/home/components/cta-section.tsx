@@ -10,7 +10,7 @@ export default function CtaSection() {
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl bg-gradient-to-r from-primary via-primary/90 to-emerald-600 p-8 sm:p-12 md:p-16 text-primary-foreground shadow-2xl overflow-hidden">
+        <div className="relative rounded-3xl bg-gradient-to-r from-primary via-primary/90 to-primary/80 p-8 sm:p-12 md:p-16 text-primary-foreground shadow-2xl overflow-hidden">
           {/* Background Glow Overlay */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-3xl rounded-full pointer-events-none" />
 

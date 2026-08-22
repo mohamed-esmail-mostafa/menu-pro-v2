@@ -24,6 +24,12 @@ class Product extends Model
     ];
 
 
+    protected $casts = [
+        'is_simple'=>'boolean',
+        'is_features'=>'boolean',
+    ];
+
+
      public function category()
     {
         return $this->belongsTo(Category::class);
@@ -32,5 +38,21 @@ class Product extends Model
     public function store()
     {
         return $this->belongsTo(Store::class);
+    }
+
+
+
+    // relation with attributes
+    public function attributes(){
+        return $this->belongsToMany(Attribute::class,'product_attributes')->withPivot([
+            'id',
+            'is_required',
+            'selection_type'
+        ]);
+    }
+
+
+    public function productAttributes(){
+        return $this->hasMany(ProductAttribute::class);
     }
 }

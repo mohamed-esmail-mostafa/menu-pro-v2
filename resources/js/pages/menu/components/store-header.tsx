@@ -1,12 +1,13 @@
 import React from 'react';
 import { Store } from '@/types/store';
-import { ShoppingBag, Heart, MapPin, Phone, CheckCircle2, Globe, Search } from 'lucide-react';
+import { ShoppingBag, Heart, MapPin, Phone, CheckCircle2, Globe, Search, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import useImport from '@/hooks/use-import';
 import ThemeToggle from '@/components/shared/theme-toggle';
 import LangToggle from '@/components/shared/lang-toggle';
+import ShareButton from './share-button';
 
 interface StoreHeaderProps {
     store: Store;
@@ -27,7 +28,7 @@ export const StoreHeader: React.FC<StoreHeaderProps> = ({
     searchQuery,
     setSearchQuery,
 }) => {
-    const { t, i18n,isAr } = useImport();
+    const { t, isAr } = useImport();
 
 
     const isOpen = store.store_status ? store.store_status.toLowerCase() === 'open' : true;
@@ -36,29 +37,29 @@ export const StoreHeader: React.FC<StoreHeaderProps> = ({
         <header className="sticky top-0 z-30 bg-background/95 backdrop-blur-md border-b border-border shadow-xs">
             {/* Top Bar */}
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center'>
-                    <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
-                        {store.address && (
-                            <div className="flex items-center gap-1.5">
-                                <MapPin className="w-3.5 h-3.5 text-primary" />
-                                <span>{store.address}</span>
-                            </div>
-                        )}
-                        {store.phone && (
-                            <div className="flex items-center gap-1.5">
-                                <Phone className="w-3.5 h-3.5 text-emerald-500" />
-                                <a href={`tel:${store.phone}`} className="hover:underline font-mono">
-                                    {store.phone}
-                                </a>
-                            </div>
-                        )}
-                    </div>
+                <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+                    {store.address && (
+                        <div className="flex items-center gap-1.5">
+                            <MapPin className="w-3.5 h-3.5 text-primary" />
+                            <span>{store.address}</span>
+                        </div>
+                    )}
+                    {store.phone && (
+                        <div className="flex items-center gap-1.5">
+                            <Phone className="w-3.5 h-3.5 text-emerald-500" />
+                            <a href={`tel:${store.phone}`} className="hover:underline font-mono">
+                                {store.phone}
+                            </a>
+                        </div>
+                    )}
+                </div>
 
 
-                  <div>
-                       <ThemeToggle />
-                        <LangToggle />
+                <div>
+                    <ThemeToggle />
+                    <LangToggle />
 
-                  </div>
+                </div>
 
             </div>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
@@ -86,19 +87,18 @@ export const StoreHeader: React.FC<StoreHeaderProps> = ({
                                 ) : null}
                                 <Badge
                                     variant={isOpen ? 'default' : 'destructive'}
-                                    className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                                        isOpen
+                                    className={`text-xs px-2 py-0.5 rounded-full font-medium ${isOpen
                                             ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
                                             : 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30'
-                                    }`}
+                                        }`}
                                 >
                                     {isOpen
                                         ? isAr
                                             ? 'مفتوح الان'
                                             : 'Open'
                                         : isAr
-                                        ? 'مغلق'
-                                        : 'Closed'}
+                                            ? 'مغلق'
+                                            : 'Closed'}
                                 </Badge>
                             </div>
                             {store.description && (
@@ -111,10 +111,10 @@ export const StoreHeader: React.FC<StoreHeaderProps> = ({
 
                     {/* Actions: Lang, Wishlist, Cart */}
                     <div className="flex items-center gap-2">
-                      
+
                         {/* <ThemeToggle />
                         <LangToggle /> */}
-
+                       <ShareButton store={store} />
                         {/* Wishlist Button */}
                         <Button
                             variant="outline"
@@ -151,7 +151,7 @@ export const StoreHeader: React.FC<StoreHeaderProps> = ({
 
                 {/* Sub Bar: Contact Info & Search */}
                 <div className="mt-3 pt-3 border-t border-border/50 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-                
+
                     <div className="relative w-full sm:w-64">
                         <Search className="absolute left-3 rtl:left-auto rtl:right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
                         <Input
