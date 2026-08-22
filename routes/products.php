@@ -9,7 +9,8 @@ Route::controller(ProductController::class)->group(function () {
     Route::put('/store/product/update/{id}', 'update_product')->name('store.product.update')->middleware('auth');
     Route::delete('/store/product/delete/{id}', 'delete_product')->name('store.product.delete')->middleware('auth');
 
-
+    Route::get("/create/product/page/{slug}", "create_product_page")->name("create.product.page")->middleware('auth');
+    Route::get("/update/product/page/{id}", "update_product_page")->name("update.product.page")->middleware('auth');
 
 
     Route::post("/add/product/attributes" , "add_product_attributes")->middleware('auth');

@@ -56,26 +56,31 @@ class ProductController extends Controller
         return Inertia::render('products/index', [
             'store' => $this->storeService->getStore($slug),
             'products'=> $this->storeService->getStoreProducts($slug),
+            'categories'=> $this->storeService->getStoreCategories($slug),
             'attributes' => $this->attributeService->getAllAttributes(),
         ]);
     }
 
     public function store_products_to_store(Request $request)
     {
-         $this->productService->storeProduct($request);
-         return redirect()->back();
+        $product = $this->productService->storeProduct($request);
+        $store = Store::find($request->store_id);
+        if ($store) {
+            return redirect()->route('store.products.page', ['slug' => $store->slug])->with('success', 'Product created successfully.');
+        }
+        return redirect()->back();
     }
 
     public function update_product(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
+        $isSimple = filter_var($request->is_simple, FILTER_VALIDATE_BOOLEAN);
 
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
+            'price' => $isSimple ? 'required|numeric|min:0' : 'nullable|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',
-            'image' => 'nullable|image|max:4096',
+            'image' => 'nullable',
             'store_category_id' => 'required',
             'is_simple' => 'nullable',
             'is_featured' => 'nullable',
@@ -98,16 +103,35 @@ class ProductController extends Controller
             }
         }
 
+        $isSimple = filter_var($request->is_simple, FILTER_VALIDATE_BOOLEAN);
+
         $product->update([
             'store_category_id' => $storeCategoryId ?: $product->store_category_id,
             'title' => $request->title,
             'description' => $request->description,
             'image' => $imagePath,
-            'price' => $request->price,
+            'price' => $request->price ?? 0,
             'sale_price' => $request->sale_price ?: null,
-            'is_simple' => filter_var($request->is_simple, FILTER_VALIDATE_BOOLEAN),
+            'is_simple' => $isSimple,
             'is_featured' => filter_var($request->is_featured, FILTER_VALIDATE_BOOLEAN),
         ]);
+
+        if (!$isSimple && $request->has('attribute_rows')) {
+            $rows = is_string($request->attribute_rows) ? json_decode($request->attribute_rows, true) : $request->attribute_rows;
+            if (is_array($rows)) {
+                $this->productService->saveProductAttributesData($product, $rows);
+            }
+        } elseif ($isSimple) {
+            $product->productAttributes()->each(function($attribute){
+                $attribute->values()->delete();
+                $attribute->delete();
+            });
+        }
+
+        $store = Store::find($product->store_id);
+        if ($store) {
+            return redirect()->route('store.products.page', ['slug' => $store->slug])->with('success', 'Product updated successfully.');
+        }
 
         return redirect()->back()->with('success', 'Product updated successfully.');
     }
@@ -119,18 +143,39 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-
-
-
-    public function add_product_attributes(Request $request){
-      $this->productService->add_product_attributes($request);
-      return redirect()->back();
+    public function add_product_attributes(Request $request)
+    {
+        $this->productService->add_product_attributes($request);
+        return redirect()->back();
     }
 
-
-    public function remove_product_attribute(int $id){
+    public function remove_product_attribute(int $id)
+    {
         $product_value = ProductAttributeValue::findOrFail($id);
         $product_value->delete();
         return redirect()->back();
+    }
+
+    public function create_product_page(string $slug)
+    {
+        $store = $this->storeService->getStore($slug);
+        return Inertia::render('products/create', [
+            'store' => $store,
+            'categories' => $this->storeService->getStoreCategories($slug),
+            'attributes' => $this->attributeService->getAllAttributes(),
+        ]);
+    }
+
+    public function update_product_page(int $id)
+    {
+        $product = Product::findOrFail($id);
+        $store = Store::with('country')->findOrFail($product->store_id);
+
+        return Inertia::render('products/update', [
+            'product' => $product,
+            'store' => $store,
+            'categories' => $this->storeService->getStoreCategories($store->slug),
+            'attributes' => $this->attributeService->getAllAttributes(),
+        ]);
     }
 }

@@ -10,27 +10,25 @@ import { Attribute } from '@/types/attributes'
 
 interface ProductsTableProps {
     store: Store,
-    handleOpenEdit: any,
-    deletingId: any,
-    attributes: Attribute[],
+    handleOpenEdit?: any,
+    deletingId?: any,
+    // attributes: Attribute[],
     products: Product[]
 }
-export default function ProductsTable({ store, handleOpenEdit, deletingId, attributes, products }: ProductsTableProps) {
+export default function ProductsTable({ store,products }: ProductsTableProps) {
     const { t } = useImport()
     return (
         <div>
             {(products && products.length > 0) ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {products.map((productItem: Product) => (
-                        
                         <ProductCard
                             key={productItem.id}
                             productItem={productItem}
                             store={store}
-                            deletingId={deletingId}
-                            handleOpenEdit={handleOpenEdit}
-                            attributes={attributes}
-
+                            // deletingId={deletingId}
+                            // handleOpenEdit={handleOpenEdit}
+                            // attributes={attributes}
                         />
                     ))}
                 </div>

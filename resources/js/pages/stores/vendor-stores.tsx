@@ -29,11 +29,11 @@ import PublicLayout from '@/layouts/public-layout';
 export default function VendorStores() {
     const { t } = useImport();
     const { stores } = useUserStores() as { stores?: Store[] };
-    const { selectStore } = (useSelectedStore() as any) || {};
+    const { selectStore,getCurrentStore } = (useSelectedStore() as any) || {};
     const [searchQuery, setSearchQuery] = useState('');
 
     const storesList = Array.isArray(stores) ? stores : [];
-
+    // const store = getCurrentStore();
     const handleSelectStore = (store: Store) => {
         if (selectStore) {
             selectStore(store);

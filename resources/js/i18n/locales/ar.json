@@ -403,7 +403,21 @@
             "confirm-delete": "هل أنت متاكد من حذف هذا المنتج؟",
             "created-success": "تم إنشاء المنتج بنجاح",
             "updated-success": "تم تحديث المنتج بنجاح",
-            "deleted-success": "تم حذف المنتج بنجاح"
+            "deleted-success": "تم حذف المنتج بنجاح",
+            "back-to-products": "العودة للمنتجات",
+            "create-title": "إضافة منتج جديد",
+            "create-subtitle": "قم بملء البيانات التالية لإضافة منتج جديد لمتجرك",
+            "edit-title": "تعديل المنتج",
+            "edit-subtitle": "قم بتحديث بيانات ومعلومات المنتج",
+            "preview": "معاينة المنتج",
+            "preview-desc": "معاينة لمظهر المنتج داخل المنيو الخاص بك",
+            "save-changes": "حفظ التغييرات",
+            "create-product": "إنشاء المنتج",
+            "attributes-info": "خيارات وإضافات المنتج",
+            "manage-attributes": "إدارة الخيارات",
+            "attributes-desc": "يمكنك إضافة أحجام أو خيارات إضافية للمنتج",
+            "product-type": "نوع المنتج",
+            "with-options": "منتج مع خيارات (أحجام / إضافات)"
         },
         "qr": {
             "main-qr": "رمز QR الرئيسي للمنيو",

@@ -1,29 +1,29 @@
 import { Product } from '@/types/product'
-import { Edit, Loader2, Plus, PlusCircle, Sparkles, Star, Tag, Trash2, Utensils } from 'lucide-react'
+import { Edit, Star, Tag, Trash2, Utensils } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import useImport from '@/hooks/use-import'
 import { Store } from '@/types/store'
 import { useState } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import AttributesDialog from './attributes-dialog'
-import { Attribute } from '@/types/attributes'
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { router } from '@inertiajs/react'
 import { toast } from 'sonner'
+import {Link} from '@inertiajs/react'
 
 interface ProductCardProps {
     productItem: Product,
     store: Store,
-    deletingId: any,
-    handleOpenEdit: any,
-    attributes: Attribute[]
+    // deletingId?: any,
+    // handleOpenEdit?: any,
+    // attributes: Attribute[]
 }
 
-export default function ProductCard({ productItem, store, deletingId, handleOpenEdit, attributes }: ProductCardProps) {
+export default function ProductCard({ store,productItem }: ProductCardProps) {
     const { t } = useImport()
-    const isDeleting = deletingId === productItem.id
+    // const isDeleting = deletingId === productItem.id
+    
     const hasDiscount = productItem.sale_price && Number(productItem.sale_price) < Number(productItem.price)
-    const [attributeDialog, setAttributeDialog] = useState(false);
+    // const [attributeDialog, setAttributeDialog] = useState(false);
     const [deleteDialogShow, setDeleteDialog] = useState(false)
     const [deletedItem, setDeletedItem] = useState<Product | null>(null)
 
@@ -105,13 +105,15 @@ export default function ProductCard({ productItem, store, deletingId, handleOpen
                     <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => handleOpenEdit(productItem)}
+                        asChild
                         className="flex-1 text-xs"
                     >
-                        <Edit className="w-3.5 h-3.5 mr-1" />
-                        {t('common.edit')}
+                        <Link href={`/update/product/page/${productItem.id}`}>
+                            <Edit className="w-3.5 h-3.5 mr-1" />
+                            {t('common.edit')}
+                        </Link>
                     </Button>
-                    <Button
+                    {/* <Button
                         size="sm"
                         variant="default"
                         onClick={() => setAttributeDialog(true)}
@@ -119,11 +121,11 @@ export default function ProductCard({ productItem, store, deletingId, handleOpen
                     >
                         <Plus className="w-3.5 h-3.5 mr-1" />
                         {t('common.add-attributes')}
-                    </Button>
+                    </Button> */}
                     <Button
                         size="sm"
                         variant="destructive"
-                        disabled={isDeleting}
+                        // disabled={isDeleting}
                         // onClick={() => handleDeleteProduct(productItem.id)}
                         onClick={() => {
                             setDeletedItem(productItem)
@@ -131,22 +133,23 @@ export default function ProductCard({ productItem, store, deletingId, handleOpen
                         }}
                         className="text-xs"
                     >
-                        {isDeleting ? (
+                        {/* {isDeleting ? (
                             <Loader2 className="w-3.5 h-3.5 animate-spin" />
                         ) : (
                             <Trash2 className="w-3.5 h-3.5" />
-                        )}
+                        )} */}
+                        <Trash2 className="w-3.5 h-3.5" />
                     </Button>
                 </div>
             </div>
 
             {/* Attibutes dialog */}
-            <AttributesDialog
+            {/* <AttributesDialog
                 productItem={productItem}
                 attributeDialog={attributeDialog}
                 setAttributeDialog={setAttributeDialog}
                 attributes={attributes}
-            />
+            /> */}
 
 
             <Dialog open={deleteDialogShow} onOpenChange={() => setDeleteDialog(false)}>
