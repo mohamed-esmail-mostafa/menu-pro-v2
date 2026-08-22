@@ -35,6 +35,10 @@ export default function ImagePicker({
     const fileInputRef = useRef<HTMLInputElement>(null)
     const { t } = useTranslation()
 
+    React.useEffect(() => {
+        setPreview(initialPreview)
+    }, [initialPreview])
+
     const handleFileChange = (file: File | null) => {
         if (file && file.type.startsWith('image/')) {
             const reader = new FileReader()

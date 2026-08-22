@@ -450,9 +450,39 @@
         "success_msg": "Website settings saved successfully!",
         "error_msg": "An error occurred while saving website settings."
     },
-    "stores":{
-        "edit-details-store":"Edit Store Details",
-        "add-new-store":"Add New Store"
-        
+    "stores": {
+        "title": "My Stores",
+        "subtitle": "Select a store to manage its digital menu, orders, and settings, or register a new store.",
+        "search-placeholder": "Search stores by name, address, or slug...",
+        "add-new-store": "Add New Store",
+        "edit-details-store": "Edit Store Details",
+        "enter-dashboard": "Enter Dashboard",
+        "view-live-menu": "View Live Menu",
+        "active": "Active",
+        "inactive": "Inactive",
+        "verified": "Verified",
+        "no-stores-found": "No stores found",
+        "no-stores-matching": "No stores match your search query.",
+        "create-first-store-desc": "You haven't registered any stores yet. Create your first digital store now to start serving customers.",
+        "create-first-store": "Create Your First Store",
+        "clear-search": "Clear search",
+        "total-stores": "Total Stores",
+        "badge-tagline": "Store Management"
+    },
+    "categories": {
+        "title": "Categories",
+        "subtitle": "Manage global system categories",
+        "add-category": "Add New Category",
+        "edit-category": "Edit Category",
+        "delete-category": "Delete Category",
+        "category-name": "Category Name",
+        "description": "Description",
+        "position": "Position / Order",
+        "image": "Category Image",
+        "search-placeholder": "Search categories by name or description...",
+        "delete-confirm-title": "Delete Category",
+        "delete-confirm-desc": "Are you sure you want to delete this category? This action cannot be undone.",
+        "saving": "Saving Category...",
+        "deleting": "Deleting..."
     }
 }

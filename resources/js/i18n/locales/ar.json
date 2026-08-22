@@ -468,7 +468,38 @@
         "error_msg": "حدث خطأ أثناء حفظ إعدادات الموقع."
     },
     "stores": {
-        "edit-details-store": " تعديل تفاصيل المتجر ",
-        "add-new-store": " اضافة متجر جديد "
+        "title": "متاجري",
+        "subtitle": "اختر متجراً لإدارة القائمة الرقمية والطلبات والإعدادات، أو أضف متجراً جديداً.",
+        "search-placeholder": "البحث عن متجر باسمه، عنوانه أو الرمز...",
+        "add-new-store": "إضافة متجر جديد",
+        "edit-details-store": "تعديل تفاصيل المتجر",
+        "enter-dashboard": "لوحة التحكم",
+        "view-live-menu": "معاينة المنيو",
+        "active": "نشط",
+        "inactive": "غير نشط",
+        "verified": "موثق",
+        "no-stores-found": "لم يتم العثور على متاجر",
+        "no-stores-matching": "لا توجد متاجر تطابق بحثك الحالي.",
+        "create-first-store-desc": "لم تقم بتسجيل أي متجر بعد. أنشئ متجرك الرقمي الأول الآن للبدء في خدمة عملائك.",
+        "create-first-store": "إنشاء متجرك الأول",
+        "clear-search": "مسح البحث",
+        "total-stores": "إجمالي المتاجر",
+        "badge-tagline": "إدارة المتاجر"
+    },
+    "categories": {
+        "title": "الأقسام",
+        "subtitle": "إدارة الأقسام العامة بالنظام",
+        "add-category": "إضافة قسم جديد",
+        "edit-category": "تعديل القسم",
+        "delete-category": "حذف القسم",
+        "category-name": "اسم القسم",
+        "description": "الوصف",
+        "position": "الترتيب",
+        "image": "صورة القسم",
+        "search-placeholder": "البحث عن قسم بالاسم أو الوصف...",
+        "delete-confirm-title": "حذف القسم",
+        "delete-confirm-desc": "هل أنت تأكد من رغبتك في حذف هذا القسم؟ لا يمكن التراجع عن هذا الإجراء.",
+        "saving": "جارٍ حفظ القسم...",
+        "deleting": "جارٍ الحذف..."
     }
 }
